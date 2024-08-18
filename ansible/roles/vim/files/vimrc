@@ -15,46 +15,54 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" make executable('node') check work when node is installed by nvm
+let g:coc_node_path = trim(system('which node'))
+let g:coc_global_extensions = [
+            \'coc-json', 'coc-git', 'coc-toml', 'coc-yaml',
+            \'coc-vimlsp', 'coc-lua',
+            \'coc-java', 
+            \'coc-basedpyright',
+            \'coc-prettier',
+            \'coc-go',
+            \'@yaegassy/coc-ansible',
+            \'coc-jq', 'coc-sh', 'coc-docker', 'coc-html']
+
 call plug#begin()
-if executable('node')
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-endif
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " configure coc.nvim
-if executable('node')
-	nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
-	nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
-	nnoremap <silent> gd <Plug>(coc-definition)
-	nnoremap <silent> gy <Plug>(coc-type-definition)
-	nnoremap <silent> gi <Plug>(coc-implementation)
-	nnoremap <silent> gr <Plug>(coc-references)
-	nnoremap <leader>rn <Plug>(coc-rename)
-	xnoremap <leader>f  <Plug>(coc-format-selected)
-	nnoremap <leader>f  <Plug>(coc-format-selected)
-	nnoremap <silent> <leader>re <Plug>(coc-codeaction-refactor)
-	xnoremap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-	nnoremap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-	nnoremap <leader>cl  <Plug>(coc-codelens-action)
+nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
+nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gy <Plug>(coc-type-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
+nnoremap <leader>rn <Plug>(coc-rename)
+xnoremap <leader>f  <Plug>(coc-format-selected)
+nnoremap <leader>f  <Plug>(coc-format-selected)
+nnoremap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xnoremap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nnoremap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nnoremap <leader>cl  <Plug>(coc-codelens-action)
 
-	nnoremap <silent> K :call ShowDocumentation()<CR>
-	function! ShowDocumentation()
-	  if CocAction('hasProvider', 'hover')
-		call CocActionAsync('doHover')
-	  else
-		call feedkeys('K', 'in')
-	  endif
-	endfunction
+nnoremap <silent> K :call ShowDocumentation()<CR>
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
-	" skip in neovim as treesitter textobjects are prefferred
-	if !has("nvim")
-		xmap if <Plug>(coc-funcobj-i)
-		omap if <Plug>(coc-funcobj-i)
-		xmap af <Plug>(coc-funcobj-a)
-		omap af <Plug>(coc-funcobj-a)
-		xmap ic <Plug>(coc-classobj-i)
-		omap ic <Plug>(coc-classobj-i)
-		xmap ac <Plug>(coc-classobj-a)
-		omap ac <Plug>(coc-classobj-a)
-	endif
+" skip in neovim as treesitter textobjects are prefferred
+if !has("nvim")
+    xmap if <Plug>(coc-funcobj-i)
+    omap if <Plug>(coc-funcobj-i)
+    xmap af <Plug>(coc-funcobj-a)
+    omap af <Plug>(coc-funcobj-a)
+    xmap ic <Plug>(coc-classobj-i)
+    omap ic <Plug>(coc-classobj-i)
+    xmap ac <Plug>(coc-classobj-a)
+    omap ac <Plug>(coc-classobj-a)
 endif

@@ -14,6 +14,9 @@
         - name: include brew
           include_role:
             name: linuxbrew
+        - name: install nvm and node
+          include_role:
+            name: node
         - name: include tmux
           include_role:
             name: tmux
@@ -24,6 +27,10 @@
         - name: install direnv
           homebrew:
             name: direnv
+            state: present
+        - name: install fzf
+          homebrew:
+            name: fzf
             state: present
       when: ansible_facts['os_family']|lower == 'debian'
     - name: include roles for debian

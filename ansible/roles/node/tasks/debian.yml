@@ -1,0 +1,28 @@
+- name: Check is nvm installed
+  shell: test -d ~/.nvm >/dev/null 2>&1
+  register: has_nvm
+  ignore_errors: yes
+- name: Install dependencies for nodejs install
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - curl
+    - software-properties-common
+  become: true 
+- name: 
+  block:
+    - file:
+        path: nvmtmp
+        state: directory
+    - get_url:
+        url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh        
+        validate_certs: false
+        dest: nvmtmp/install.sh
+        mode: 0755
+    - shell: ./nvmtmp/install.sh
+    - file:
+        path: nvmtmp
+        state: absent
+    - shell: . /home/blake/.nvm/nvm.sh && nvm install --lts
+  when: has_nvm.rc > 0

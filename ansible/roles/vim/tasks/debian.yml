@@ -8,4 +8,4 @@
   ansible.builtin.copy:
     src: vimrc
     dest: ~/.vimrc
-    force: no
+    force: yes
