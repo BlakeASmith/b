@@ -14,6 +14,9 @@
         - name: include brew
           include_role:
             name: linuxbrew
+        - name: include tmux
+          include_role:
+            name: tmux
         - name: install lazygit
           homebrew:
             name: lazygit
@@ -28,6 +31,9 @@
         - name: include bash
           include_role:
             name: bash
+        - name: include bash
+          include_role:
+            name: tmux
         - name: install lazygit
           homebrew:
             name: lazygit
