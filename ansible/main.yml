@@ -5,6 +5,9 @@
   tasks:
     - name: include roles for debian
       block:
+        - name: include bash
+          include_role:
+            name: bash
         - name: include vim
           include_role:
             name: vim

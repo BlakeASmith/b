@@ -4,13 +4,20 @@
   ignore_errors: yes
 - name: Install Brew
   block:
+    - ansible.builtin.apt:
+        name: curl
+        state: latest
+      become: true
+    - file:
+        path: brewtmp
+        state: directory
     - get_url:
         url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
         validate_certs: false
-        dest: ./install_brew.sh
+        dest: brewtmp/install_brew.sh
         mode: 0755
-    - command: ./install_brew.sh
+    - shell: ./brewtmp/install_brew.sh
     - file:
-        path: ./install_brew.sh
+        path: brewtmp
         state: absent
   when: has_brew.rc > 0
