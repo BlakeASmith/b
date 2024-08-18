@@ -3,6 +3,7 @@
   ansible.builtin.apt:
     name: vim
     state: latest
+  become: true
 - name: copy vimrc
   ansible.builtin.copy:
     src: vimrc
