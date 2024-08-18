@@ -1,0 +1,14 @@
+---
+- name: Test
+  hosts: all
+
+  tasks:
+    - name: include roles for debian
+      block:
+        - name: include vim
+          include_role:
+            name: vim
+        - name: include brew
+          include_role:
+            name: linuxbrew
+      when: ansible_facts['os_family']|lower == 'debian'

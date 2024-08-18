@@ -1,0 +1,16 @@
+- name: Check is brew installed
+  shell: command -v brew >/dev/null 2>&1
+  register: has_brew
+  ignore_errors: yes
+- name: Install Brew
+  block:
+    - get_url:
+        url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+        validate_certs: false
+        dest: ./install_brew.sh
+        mode: 0755
+    - command: ./install_brew.sh
+    - file:
+        path: ./install_brew.sh
+        state: absent
+  when: has_brew.rc > 0

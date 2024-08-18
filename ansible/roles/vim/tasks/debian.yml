@@ -1,0 +1,11 @@
+---
+- name: install vim with apt
+  ansible.builtin.apt:
+    name: vim
+    state: latest
+  become: true
+- name: copy vimrc
+  ansible.builtin.copy:
+    src: vimrc
+    dest: ~/.vimrc
+    force: no
