@@ -2,7 +2,14 @@
   ansible.builtin.copy:
     src: bashrc
     dest: ~/.bashrc
+    force: true
 - name: Copy aliases
   ansible.builtin.copy:
     src: aliases.sh
     dest: ~/.bash_aliases
+    force: true
+- name: Copy extensions
+  ansible.builtin.copy:
+    src: bash_extensions/
+    dest: ~/.bash_extensions/
+    force: true

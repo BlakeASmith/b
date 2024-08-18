@@ -15,3 +15,9 @@ bind '"\e[B":history-search-forward'
 [[ -d $HOME/.local/bin ]] && export PATH="$PATH:$HOME/.local/bin"
 
 [[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
+
+if [[ -d $HOME/.bash_extensions ]]; then
+    for f in "$HOME/.bash_extensions/*"; do
+        source $f
+    done
+fi
