@@ -1,3 +1,8 @@
 - name: Install vim on Debian
   import_tasks: debian.yml
   when: ansible_facts['os_family']|lower == 'debian'
+- name: Set vim as the default editor
+  become: true
+  alternatives:
+      name: editor
+      path: /usr/bin/vim
