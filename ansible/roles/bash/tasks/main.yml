@@ -2,3 +2,7 @@
   ansible.builtin.copy:
     src: bashrc
     dest: ~/.bashrc
+- name: Copy aliases
+  ansible.builtin.copy:
+    src: aliases.sh
+    dest: ~/.bash_aliases

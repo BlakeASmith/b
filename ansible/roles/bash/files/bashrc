@@ -1,12 +1,17 @@
+[[ $- != *i* ]] && return
+[[ -f ~/.welcome_screen ]] && . ~/.welcome_screen
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# the most important setting
+set -o vi
+
+# make arrow keys work
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
 
 # Source linux brew if it is installed
 [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # PATH
 [[ -d $HOME/.local/bin ]] && export PATH="$PATH:$HOME/.local/bin"
+
+[[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
