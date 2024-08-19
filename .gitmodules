@@ -1,3 +1,6 @@
 [submodule "btools"]
 	path = btools
 	url = https://github.com/BlakeASmith/btools.git
+[submodule "bincli"]
+	path = bincli
+	url = https://github.com/BlakeASmith/bincli.git
