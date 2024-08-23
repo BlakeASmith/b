@@ -32,6 +32,10 @@
           homebrew:
             name: fzf
             state: present
+        - name: install go
+          homebrew:
+            name: go
+            state: present
       when: ansible_facts['os_family']|lower == 'debian'
     - name: include roles for debian
       block:
